@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabores de la Huerta | Proyecto Interdisciplinar 2º ESO</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2e7d32; /* Verde huerta */
+            --primary-dark: #1b5e20;
+            --accent-color: #fbc02d; /* Amarillo limón */
+            --accent-hover: #f57f17;
+            --bg-light: #f9fbe7;
+            --text-dark: #263238;
+            --text-muted: #546e7a;
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-dark);
+            background-color: #f4f6f8;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Header & Navegación */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent-hover);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(46,125,50,0.9), rgba(27,94,32,0.85)), url('https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            color: var(--white);
+            text-align: center;
+            padding: 5rem 2rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            background-color: var(--accent-color);
+            color: var(--text-dark);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--text-dark);
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform 0.2s, background-color 0.2s;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Contenedor General */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* Sobre el Proyecto & Antecedentes */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .card.accent {
+            border-top-color: var(--accent-color);
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+
+        .card ul {
+            padding-left: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .card li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Asignaturas Grid */
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .subject-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 1.8rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .subject-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .subject-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+        }
+
+        /* Banner Barraca Huertana */
+        .barraca-banner {
+            background: linear-gradient(to right, var(--primary-dark), var(--primary-color));
+            color: var(--white);
+            border-radius: var(--radius);
+            padding: 3rem 2rem;
+            margin: 3rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .barraca-info {
+            max-width: 650px;
+        }
+
+        .barraca-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        /* Taller y Evaluación */
+        .info-box-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-box {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .info-box h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge-lemon {
+            background-color: var(--bg-light);
+            border: 2px solid var(--accent-color);
+            padding: 1rem;
+            border-radius: var(--radius);
+            text-align: center;
+            margin-top: 1rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 2.5rem 1rem;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Navbar */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navegación -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                🍋 Sabores de la <span>Huerta</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#proyecto">El Proyecto</a></li>
+                    <li><a href="#barraca">La Barraca</a></li>
+                    <li><a href="#asignaturas">Asignaturas</a></li>
+                    <li><a href="#taller">Taller & Evaluación</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <span class="hero-badge">IES Alquibla • La Alberca (Murcia)</span>
+            <h1>Sabores de la Huerta</h1>
+            <p>Proyecto interdisciplinar de 2º de ESO sobre gastronomía murciana, productos de Km 0 y cultura huertana.</p>
+            <a href="#proyecto" class="btn-primary">Descubrir el Proyecto</a>
+        </div>
+    </section>
+
+    <!-- Sobre el Proyecto & Evolución -->
+    <section class="container" id="proyecto">
+        <div class="section-title">
+            <h2>De "Come_sano" a la Huerta Murciana</h2>
+            <p>Transformación del proyecto interdisciplinar enfocado en las raíces y tradiciones locales</p>
+        </div>
+
+        <div class="about-grid">
+            <div class="card">
+                <h3>Evolución del Proyecto</h3>
+                <p>En el curso anterior, los alumnos de 2º ESO desarrollaron el proyecto <em>Come_sano</em> diseñando restaurantes internacionales. Este curso enriquecemos la propuesta enfocándola en la <strong>gastronomía local de la Región de Murcia</strong>, contextualizada en nuestra pedanía de La Alberca, entre la Huerta de Murcia y el Parque Natural de El Valle.</p>
+            </div>
+
+            <div class="card accent">
+                <h3>Objetivos Principales</h3>
+                <ul>
+                    <li>Promover la <strong>dieta mediterránea</strong> y hábitos saludables.</li>
+                    <li>Fomentar la sostenibilidad mediante productos de <strong>Kilómetro 0</strong>.</li>
+                    <li>Aprender sobre recetas tradicionales (zarangollo, pisto, michirones, arroces).</li>
+                    <li>Desarrollar el trabajo en equipo y la autonomía personal.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destacado Barraca Huertana -->
+    <section class="container" id="barraca" style="padding-top: 0; padding-bottom: 0;">
+        <div class="barraca-banner">
+            <div class="barraca-info">
+                <h3>El Corazón del Proyecto: La Barraca</h3>
+                <p>En lugar de gestionar restaurantes convencionales, los alumnos trabajarán en equipos para proyectar y simular el montaje de una <strong>Barraca tradicional</strong>. Recrearán las construcciones típicas de las Peñas Huertanas en las Fiestas de Primavera, ofreciendo una muestra viva de nuestra gastronomía y cultura.</p>
+            </div>
+            <div style="font-size: 5rem; text-align: center;">🛖🌾</div>
+        </div>
+    </section>
+
+    <!-- Asignaturas Participantes -->
+    <section class="container" id="asignaturas">
+        <div class="section-title">
+            <h2>Trabajo Interdisciplinar por Asignaturas</h2>
+            <p>Cada materia aporta competencias clave para la puesta en marcha de la Barraca</p>
+        </div>
+
+        <div class="subjects-grid">
+            <!-- Matemáticas -->
+            <div class="subject-card">
+                <div class="subject-icon">📐</div>
+                <h3>Matemáticas</h3>
+                <p><strong>Proveedores Km 0 & Gestión:</strong> Elección de proveedores locales de la huerta, presupuestos, cálculo de materiales (cañas, madera) para levantar la barraca y resolución de problemas de caja y raciones del día a día.</p>
+            </div>
+
+            <!-- Educación Plástica -->
+            <div class="subject-card">
+                <div class="subject-icon">🎨</div>
+                <h3>Educación Plástica y Visual</h3>
+                <p><strong>Identidad Visual & Decoración:</strong> Diseño del logotipo, imagen de marca y estética de la Peña Huertana, junto con la ambientación rústica de los espacios del centro educativo.</p>
+            </div>
+
+            <!-- Música -->
+            <div class="subject-card">
+                <div class="subject-icon">🎵</div>
+                <h3>Música</h3>
+                <p><strong>Jingles Promocionales:</strong> Composición de cuñas publicitarias combinando ritmos y folclore tradicional murciano (parrandas, jotas) para promocionar la Barraca.</p>
+            </div>
+
+            <!-- Inglés -->
+            <div class="subject-card">
+                <div class="subject-icon">🇬🇧</div>
+                <h3>Inglés</h3>
+                <p><strong>The Murcian Recipe Book:</strong> Redacción y traducción al inglés del recetario tradicional (pisto, zarangollo, michirones, arroces) para dar a conocer nuestra gastronomía a nivel internacional.</p>
+            </div>
+
+            <!-- Francés -->
+            <div class="subject-card">
+                <div class="subject-icon">🇫🇷</div>
+                <h3>Francés</h3>
+                <p><strong>La Carte de la Barraca:</strong> Diseño de la carta de platos típicos e ingredientes de la huerta en francés (<em>Bon appétit!</em>) orientada a visitantes francófonos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Taller Práctico y Evaluación -->
+    <section class="container" id="taller">
+        <div class="info-box-wrapper">
+            <!-- Taller de Cocina -->
+            <div class="info-box">
+                <h3>🍳 Taller de Cocina Práctico</h3>
+                <p><strong>Fecha:</strong> Mayo de 2027 (4 horas de duración).</p>
+                <p><strong>Lugar:</strong> Aula Gastronómica María Dolores Baró.</p>
+                <p><strong>Supervisión:</strong> Chef María Dolores Baró y el profesor Santiago Madrid Mota.</p>
+                <p><strong>Metodología:</strong> Taller 100% práctico donde 25 alumnos de 2º ESO elaborarán y emplatarán recetas tradicionales con ingredientes aportados por los cocineros profesionales.</p>
+                <p style="margin-top: 1rem; font-weight: 600; color: var(--primary-color);">Presupuesto Total: 550 €</p>
+            </div>
+
+            <!-- Sistema de Evaluación -->
+            <div class="info-box">
+                <h3>🏆 Evaluación: Limones de Oro</h3>
+                <p>En consonancia con la temática huertana, el sistema de gamificación sustituye las estrellas Michelin del curso pasado por los galardones de los <strong>Limones de Oro</strong>.</p>
+                
+                <div class="badge-lemon">
+                    🍋 ¡Los grupos acumulan Limones de Oro al superar los retos de cada asignatura!
+                </div>
+                
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">
+                    Se evaluará la participación activa del alumnado, la calidad técnica del monitor, la coordinación del Jefe de Actividades Extraescolares y la memoria final del profesorado.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>IES Alquibla • La Alberca (Murcia) • Proyecto Educativo 2º ESO</p>
+        <p><em>Promoviendo la cultura, la gastronomía y la salud de nuestra tierra.</em></p>
+    </footer>
+
+</body>
+</html>
